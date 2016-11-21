@@ -1,0 +1,18 @@
+{layout name="layout" /}
+<div class="container">
+    <div style="margin-top:40px;">
+        <h1 style="margin-bottom:20px;">下载地址:ＰＨＰ 2016最新视频课程</h1>
+        {volist name='video' id='da'}
+        <div class="panel panel-default">
+            <div class="panel-heading">在百度网盘下载</div>
+            <div class="panel-body">
+                <a href="{$da.vconnect}" target="_blank">点击下载</a>
+            </div>
+        </div>
+        {/volist}
+        <div class="alert alert-info">推荐使用 <a href="{$da.vconnect}" target="_blank">百度云下载</a></div>
+        <div class="alert alert-success">如果无法下载请联系 QQ2541553191 </div>
+    </div>
+</div>
+
+

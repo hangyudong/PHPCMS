@@ -1,0 +1,102 @@
+
+{layout name="layout" /}
+<div class="container">
+    {volist name='haha' id='lala'}
+    <div>{$lala.ncontent}</div>
+    {/volist}
+
+    <h2 name="com">我来说两句</h2>
+    <form action="{:url('/report')}" method="post" onsubmit="return false;">
+        <textarea class="form-control" id="content" rows="3" name="content"></textarea>
+        <div class="tishi"></div><br />       
+        <div class="form-group">
+            <label for="yzm">验证码</label>
+            <input name='captcha' type="text" class="form-control" id="captcha" placeholder="请输入验证码"><br />
+            <img src="{:captcha_src()}" alt="captcha" id="cap" onclick="this.src = '{:captcha_src()}'"  />
+        </div>   
+        <input class="btn btn-default" id="submit" type="submit" value="发表评论" />
+    </form>
+</div>
+<div class="container" id="comment-list">
+    {volist name='list' id='words'}
+    <div class="comment">
+        <h5 class="title fn">
+            <font color="#FF0000">{$words.create_time}</font>
+            {$Think.session.username}
+        </h5>
+        <div class="content">
+            {$words.content}		
+            <div class="rt">
+                <a href="javascript:void(0)" onclick="reply(677, 'content_8-5-1')">回复</a>
+            </div>
+            <div id="reply_677" style="display:none"></div>
+        </div>
+        <hr />
+    </div>
+    {/volist}
+    {$page}
+</div>
+
+<script>
+    $('#submit').click(function ()
+    {
+        reportMessage();
+    });
+    function reportMessage() {
+        if ($('#content').val() == "") {
+            //$('#username').val('您的账号名称');
+            $('#content').css('color', '#ccc');
+            $('#content').next().html('留言内容不能为空');
+            $('#content').next().css('color', 'red');
+
+        } else if ($('#content').val().length < 10 || $('#content').val().length > 50) {
+            $('#content').next().html('留言内容字数不正确,至少十个字，最多50个字');
+            $('#content').next().css('color', 'red');
+
+        } else {
+            $('#content').next().html('');
+
+            $.ajax({
+                url: "{:url('Display/report')}",
+                type: "post",
+                dataType: "json",
+                async: true,
+                data: {
+                    content: $("#content").val(),
+                    captcha: $("#captcha").val()
+                    
+                },
+                success: function (data) {
+                    if(data.status)
+                    {
+                        $('#comment-list').html(setCommentHtml(data.data) + $('#comment-list').html());
+                    }
+                    $("#cap").attr('src', '{:captcha_src()}');
+
+                }
+            });
+        }        
+    }
+    
+    function setCommentHtml(comment)
+    {
+        var str = '';
+        str += '<div class="comment">';
+        str += '<h5 class="title fn">';
+        str += '<font color="#FF0000">'+ comment.create_time +'</font>';
+        str += comment.username + '</h5>';
+        str += '<div class="content">' + comment.content;
+        str += '<div class="rt">';
+        str += '<a href="javascript:void(0)" onclick="reply(677)">回复</a>';
+        str += '</div>';
+        str += '<div id="reply_677" style="display:none"></div>';
+        str += '</div>';
+        str += '<hr>';
+        str += '</div>';
+        
+        return str;
+    }
+</script>
+
+
+

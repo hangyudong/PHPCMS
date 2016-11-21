@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap.css" />
+<link rel="stylesheet" type="text/css"
+	href="/dist/Css/bootstrap-responsive.css" />
+<link rel="stylesheet" type="text/css" href="/dist/Css/style.css" />
+<script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+<script type="text/javascript" src="/dist/Js/jquery2.sorted.js"></script>
+<script type="text/javascript" src="/dist/Js/bootstrap.js"></script>
+<script type="text/javascript" src="/dist/Js/ckform.js"></script>
+<script type="text/javascript" src="/dist/Js/common.js"></script>
+
+<style type="text/css">
+body {font-size: 20px;
+	padding-bottom: 40px;
+	background-color: #e9e7ef;
+}
+
+.sidebar-nav {
+	padding: 9px 0;
+}
+
+@media ( max-width : 980px) {
+	/* Enable use of floated navbar text */
+	.navbar-text.pull-right {
+		float: none;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+}
+
+.pagination li{
+    
+    float:left;
+    padding-left:30px;
+    list-style: none;
+	
+}
+
+</style>
+</head>
+<body>
+	<form class="form-inline definewidth m20" action="#" method="get">
+		 <font color="#777777"><strong>大类信息：</strong></font> 
+		
+	</form>
+	<table class="table table-bordered table-hover definewidth m10" >
+		<thead>
+			<tr>
+				<th style="width:10%;height:50px;">板块主题</th>
+			    <th style="width:10%;height:50px;">板块名字</th>
+			    <th style="width:6%;height:50px;">板块样式</th>
+			    <th style="width:10%;height:50px;">板块连接</th>
+			    <th style="width:30%;height:50px;">板块内容</th>
+				<th style="width:10%;height:50px;">查看老师</th>
+				<th style="width:10%;height:50px;">老师管理</th>
+				<th style="width:7%;height:50px;">修改</th>
+				<th style="width:7%;height:50px;">删除</th>
+			</tr>
+		</thead>
+		{volist name="list" id="data"}
+		<tr>
+			<td>{$data.stopic}</td>
+			<td>{$data.sname}</td>
+			<td>{$data.sform}</td>
+			<td>{$data.sconnect}</td>
+			<td>{$data.scontent}</td>
+			
+		    <td>
+		    	<select style="width:70px;">
+		    {volist name="Tlist" id="tech"}
+		    	{if ($data.sid == $tech.sid)}
+			    <option value="2"/>{$tech.tname}</option>
+				{/if}
+			{/volist}
+				</select>
+			</td>
+			
+			<td>
+			    <button type="submit"><a href="{:url('subjectQuery',['sid' => $data.sid])}">小板块管理</a></button> 
+            </td>
+			<td>
+			    <button type="submit">
+				<a href="{:url('classUpdate',['sid' => $data.sid])}">修改</a>
+				</button> 
+            </td>
+
+			<td>
+				<a onclick="return confirm('确认要删除吗')" href="{:url('sectionDelete',['sid' => $data.sid])}"><button type="submit">删除</button></a> 
+			</td>
+
+		</tr>
+
+		{/volist}
+	</table>
+
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button"  id="addnew">
+			<a href="{:url('classAdd')}">添加大类</a>
+		</button>
+		
+			{$page}
+	</body>
+</html>

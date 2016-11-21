@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap-responsive.css" />
+        <link rel="stylesheet" type="text/css" href="/dist/Css/style.css" />
+        <script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+        <script type="text/javascript" src="/dist/Js/jquery2.sorted.js"></script>
+        <script type="text/javascript" src="/dist/Js/bootstrap.js"></script>
+        <script type="text/javascript" src="/dist/Js/ckform.js"></script>
+        <script type="text/javascript" src="/dist/Js/common.js"></script>
+
+        <style type="text/css">
+            body {font-size: 20px;
+                  padding-bottom: 40px;
+                  background-color:#e9e7ef;
+            }
+            .sidebar-nav {
+                padding: 9px 0;
+            }
+
+            @media (max-width: 980px) {
+                /* Enable use of floated navbar text */
+                .navbar-text.pull-right {
+                    float: none;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                }
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <table class="table table-bordered table-hover definewidth m10">
+            <thead>
+                <tr>
+                    <th>简介</th>
+                    <th>意义目标</th>
+                    <th>联系微信</th>
+                    <th>创建时间</th>
+                    <th>更新时间</th>
+                    <th>删除时间</th>
+                    <th>恢复</th>
+                    <th>删除</th>
+
+                </tr>
+            </thead>
+            {volist name="list" id="data"}
+            <tr>
+
+                <td>{$data.intro}</td>
+                <td>{$data.goal}</td>
+                <td>{$data.wechat}</td>
+                <td>{$data.create_time}</td>
+                <td>{$data.update_time}</td>
+                <td>{$data.delete_time}</td>
+                <td><a href="{:url('authorEdite',['aid' => $data.aid])}">恢复</a></td>
+                <td><a onclick="return confirm('你确定要删除吗？')" href="{:url('authorDelete',['aid' => $data.aid])}">删除</a></td>
+
+            </tr>
+            {/volist}    
+
+        </table>
+        {$page}
+
+    </body>
+</html>

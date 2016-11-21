@@ -1,0 +1,61 @@
+
+{layout name="layout" /}
+<div class="container">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+        <div class="page-header">
+            <h1>登录会员 
+                <small>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a href="{:url('/login')}" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span> 登录</a>
+                        <a href="{:url('/register')}" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> 注册</a>
+                    </div>          
+                </small>
+            </h1>
+        </div>    
+        <form action="{:url('/checkLogin')}" method="post">
+            <div class="form-group">
+                <label for="username">账号</label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="请输入你的账号">
+                <div class="tishi"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="请填写你的密码">
+            </div>   
+            <div class="form-group">
+                <button type="submit" class="btn btn-default"/>登录</button>
+            </div>     
+        </form>    
+    </div>
+    <div class="col-md-3">
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $("#username").blur(function () {
+        checkName();
+    });
+    function checkName() {
+        var reg = /^[a-zA-Z-_]*$/;
+        if ($('#username').val() == "") {
+
+            //$('#username').val('您的账号名称');
+            $('#username').css('color', '#ccc');
+            $('#username').next().html('账号名称不能为空');
+            $('#username').next().css('color', 'red');
+        } else if ($('#username').val().length < 3 || $('#username').val().length > 20) {
+            $('#username').next().html('账户名称过短,必须3-20字符');
+            $('#username').next().css('color', 'red');
+        } else if (!reg.test($('#username').val())) {
+            $('#username').next().html('格式错误,仅支持英文、“-”、“_”的组合');
+            $('#username').next().css('color', 'red');
+        } else {
+            $('#username').next().html('');
+        }
+    }
+</script>

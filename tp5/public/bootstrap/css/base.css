@@ -1,0 +1,16 @@
+*{
+    font-family: Helvetica Neue,Helvetica,Arial,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,Microsoft Yahei,sans-serif;
+}
+
+.form_error{color:red;}
+
+.content{
+    line-height: 1.6;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    color:#333;
+}
+.content p{text-indent: 2em;}
+.content h1{font-size:18px; font-weight: bold; margin-bottom:20px;}
+.content h2{font-size:16px; font-weight: bold; margin-bottom:20px;}
+.content h3{font-size:14px; font-weight: bold; margin-bottom:20px;}

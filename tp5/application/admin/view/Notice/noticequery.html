@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Creating Modal Window with Twitter Bootstrap">
+<link href="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet"> 
+	<link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/style.css" />
+    <script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquery2.sorted.js"></script>
+    <script type="text/javascript" src="/dist/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/dist/Js/ckform.js"></script>
+    <script type="text/javascript" src="/dist/Js/common.js"></script>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+            background-color:#e9e7ef;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        .pagination li{
+                float:left;
+                padding-left:50px;
+                list-style-type:none;
+            }
+
+
+    </style>
+</head>
+<body>
+<form class="form-inline definewidth m20" action="{:url('notifySelect')}" method="get">
+    <font color="#33ccff"><strong>公告标签内容：</strong></font>
+    <input type="text" name="nname" id="menuname" class="abc input-default" placeholder="" value="">&nbsp;&nbsp; 
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; <a href="{:url('noticeAdd')}"><button type="button" class="btn btn-success" id="addnew">添加公告</button></a>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>标签的内容</th>
+        <th>公告的连接</th>
+        <th>公告的样式</th>
+        <th>公告的内容</th>
+     
+        <th>创建的时间</th>
+        <th>更新的时间</th>
+        <th>修改</th>
+        <th>删除</th>
+    </tr>
+    </thead>
+        {volist name="list" id="notify"}
+        <tr>
+            <td>{$notify.nname}</td>
+            <td>{$notify.nconnect}</td>
+            <td>{$notify.nform}</td>
+            <td>{$notify.ncontent}</td>
+            
+            <td>{$notify.create_time}</td>
+            <td>{$notify.update_time}</td>
+            <td><a href="{:url('notifyEdit',['nid' => $notify.nid])}">修改</a></td>
+             <td><a onclick="return confirm('确认删除吗？')" href="{:url('notifyDelete',['nid' => $notify.nid])}">删除</a></td>
+
+        </tr>
+         {/volist}  
+       
+       </table>
+        {$page}
+</body>
+</html>
+<script src="/dist/js/jquery.min.js"></script>
+<script src="/dist/js/bootstrap-tooltip.js"></script>
+<script src="/dist/js/bootstrap-popover.js"></script>
+<script>
+$(function ()
+{ $("#xiangqing").popover();
+});
+</script>

@@ -1,0 +1,177 @@
+{layout name="layout" /}
+<div class="container">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+        <div class="page-header">
+            <h1>注册会员 
+                <small>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a href="{:url('/login')}" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> 登录</a>
+                        <a href="{:url('/register')}" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> 注册</a>
+                    </div>          
+                </small>
+            </h1>
+        </div>    
+        <form action="{:url('/checkRegister')}" method="post">
+            <div class="form-group">
+                <label for="username">账号</label>
+                <input type="text" class="form-control" name="username" id="username" value="" placeholder="请输入用户名">
+                <div class="tishi"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" class="form-control" name="password"  value="" id="password" placeholder="请填写你的密码">
+                <div class="tishi"></div>
+            </div> 
+            <div class="form-group">
+                <label for="password">确认密码</label>
+                <input type="password" class="form-control" name="repassword"  value="" id="repassword" placeholder="请再次填写密码">
+                <div class="tishi"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="text" class="form-control" name="email"  value="" id="email" placeholder="请填写邮箱">
+                <div class="tishi"></div>
+            </div>
+            <div class="form-group">
+                <label for="yzm">验证码</label>
+                <input name='captcha' type="text" class="form-control" value="" id="code" placeholder="请输入验证码"><br />
+                <img src="{:captcha_src()}" alt="captcha" onclick="this.src = '{:captcha_src()}'"  />
+
+            </div>  
+            <div class="form-group">
+                <input id="submit" type="submit" value="提交" class="btn btn-default" />
+            </div>     
+        </form>    
+    </div>
+    <div class="col-md-3">
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $("#username").blur(function () {
+        checkName();
+    });
+    $('#password').blur(function () {
+        checkPassword();
+    });
+    $('#repassword').blur(function () {
+        checkRepassword();
+    });
+    $('#email').blur(function () {
+        checkEmail();
+    });
+    function checkName() {
+        var reg = /^[a-zA-Z\-\_]*$/;
+        if ($('#username').val() == "") {
+            //$('#username').val('您的账号名称');
+            $('#username').css('color', '#ccc');
+            $('#username').next().html('账号名称不能为空');
+            $('#username').next().css('color', 'red');
+
+        } else if ($('#username').val().length < 3 || $('#username').val().length > 10) {
+            $('#username').next().html('账户长度不正确,必须3-10字符');
+            $('#username').next().css('color', 'red');
+
+        } else if (!reg.test($('#username').val())) {
+            $('#username').next().html('格式错误,仅支持英文、“-”、“_”的组合');
+            $('#username').next().css('color', 'red');
+
+        } else if (reg.test($('#username').val())) {
+            $('#username').next().html('');
+
+            $.ajax({
+                url: "{:url('Sign/checkUsername')}",
+                type: "post",
+                dataType: "json",
+                async: true,
+                data: {
+                    username: $("#username").val()
+                },
+                success: function (data) {
+                    //var obj = JSON.parse(data);
+                    if (data.status) {
+                        $('#username').next().html('用户名已被注册');
+                        $('#username').next().css('color', 'red');
+                        $('#submit').attr('disabled', 'disabled');
+                    } else {
+                        $('#username').next().html('用户名可以注册');
+                        $('#username').next().css('color', 'green');
+                        $('#submit').removeAttr('disabled');
+                    }
+                }
+            });
+        }
+    }
+
+    function checkPassword() {
+        var reg = /^[a-zA-Z\-\_]*$/;
+
+        if ($('#password').val() == '') {
+            $('#password').next().html('密码不能为空');
+            $('#password').next().css('color', 'red');
+        } else if ($('#password').val().length < 6) {
+            $('#password').next().html('密码长度不正确');
+            $('#password').next().css('color', 'red');
+        } else if (!reg.test($('#password').val())) {
+            $('#password').next().html('格式错误,仅支持英文、“-”、“_”的组合');
+            $('#password').next().css('color', 'red');
+        } else {
+            $('#password').next().html('密码可用');
+            $('#password').next().css('color', 'green');
+        }
+    }
+
+    function checkRepassword() {
+        if ($('#password').val() != $('#repassword').val()) {
+            $('#repassword').next().html('两次密码不一致');
+            $('#repassword').next().css('color', 'red');
+        } else {
+            $('#repassword').next().html('两次密码一致，通过');
+            $('#repassword').next().css('color', 'green');
+        }
+    }
+
+    function checkEmail() {
+        debugger;
+        var flag = false;
+        var reg1 = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/;
+        if ($('#email').val() == '') {
+            //$('#email').val('您的常用邮箱地址');
+            $('#email').css('color', '#ccc');
+            $('#email').next().html('邮箱不能为空');
+            $('#email').next().css('color', 'red');
+
+        } else if (!reg1.test($('#email').val())) {
+            $('#email').next().html('邮箱格式错误');
+            $('#email').next().css('color', 'red');
+
+        } else if (reg1.test($('#email').val())) {
+            $.ajax({
+                url: "{:url('Sign/checkEmail')}",
+                type: "post",
+                dataType: "json",
+                async: true,
+                data: {
+                    email: $("#email").val()
+                },
+                success: function (data) {
+                    if (data.status) {
+                        $('#email').next().html('邮箱已注册');
+                        $('#email').next().css('color', 'red');
+                        $('#submit').attr('disabled', 'disabled');
+                    } else {
+                        $('#email').next().html('邮箱可以注册');
+                        $('#email').next().css('color', 'green');
+                        $('#submit').removeAttr('disabled');
+                    }
+                }
+            });
+        }
+
+    }
+</script>

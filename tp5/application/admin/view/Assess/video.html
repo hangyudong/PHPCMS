@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/style.css" />
+    <script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquery2.sorted.js"></script>
+    <script type="text/javascript" src="/dist/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/dist/Js/ckform.js"></script>
+    <script type="text/javascript" src="/dist/Js/common.js"></script>
+
+    <style type="text/css">
+        body {font-size: 20px;
+		font-size: 20px;
+            padding-bottom: 40px;
+            background-color:#e9e7ef;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+        .pagination li{
+    
+    float:left;
+    padding-left:30px;
+    list-style: none;
+    
+        }
+
+
+
+    </style>
+</head>
+<body >
+<form class="form-inline definewidth m20" action="{:url('videoSelect')}" method="get">
+    <font color="#777777"><strong>视频名称：</strong></font>
+    <input type="text" name="vname" id="menuname" class="abc input-default" placeholder="" value="">&nbsp;&nbsp; 
+    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp; 
+	<button type="button"  id="addnew"><a href="{:url('videosAdd')}">添加视频</a></button>
+</form>
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>视屏名</th>
+        <th>板块名</th>
+        <th>老师名</th>
+        <th>视屏连接</th>
+        <th>创建时间</th>
+        <th>更新时间</th>
+        <th>修改</th>
+        <th>删除</th>
+    </tr>
+    </thead>
+	     {volist name="list" id="data"}
+        <tr>
+                <td>{$data.vname}</td>
+                <td>{$data.stopic}</td>
+                <td>{$data.tname}</td>
+                <td>{$data.vconnect}</td>
+                <td>{$data.create_time}</td>
+                <td>{$data.update_time}</td>
+                <td><a href="{:url('vEdit',['vid' => $data.vid])}">恢复</a></td>
+                <td><a onclick = "return confirm('你确定删除吗？')" href="{:url('vDelete',['vid' => $data.vid])}">删除</a></td>
+               
+        </tr>
+          {/volist} 
+       
+       </table>
+
+  {$page}  
+
+</body>
+</html>

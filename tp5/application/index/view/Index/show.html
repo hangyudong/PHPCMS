@@ -1,0 +1,67 @@
+
+{layout name="layout" /}
+<div class="container">
+    <div class="col-md-9">
+        {volist name='data_head' id='d'}
+        <div class="jumbotron"  style="text-align:center;">
+            <h1>{$d.htitle}</h1>
+            <p>{$d.hcontent}<a href="{$d.hconnect}" target="_blank">最终作品</a> </p>
+            <p>(www.phpstudy.com 倾情奉献，不是最好，是你真正可实现)</p>
+        </div>
+        {/volist}
+        {volist name='data_teacher' id='da'}
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list"></span>&nbsp;&nbsp;{$da.tname}<span class="text-muted btn-sm">（<span class='text-danger'></span>{$da.wisdom}）</span>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-4">
+                    <img src="/bootstrap/img/{$da.image}.jpg" class="img-responsive"/>
+                </div>
+                <div class="col-md-8">
+                    <div class="list-group text-success">
+                        {$da.summary}
+                    </div>
+
+                    <div class="list-group">
+                        <a target="_blank" href="<?php echo  '/'.$da['connect'] . '/tid/'.$da['tid'] . '/sid/' . $da['sid'];?>" class="list-group-item">
+                            <span style="color:blue" class="glyphicon glyphicon-download-alt"></span>
+                            本章视频下载【百度网盘】                    
+                        </a>                                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/volist}             
+    </div>
+    <div class="col-md-3">
+        {volist name='data_author' id='data'}
+        <div class="list-group">
+            <a href="#" class="list-group-item active">
+                作者简介
+            </a>
+            <a href="#" class="list-group-item">
+                {$data.intro}
+            </a>
+            <a href="#" class="list-group-item">
+                {$data.goal}
+            </a>
+            <a href="#" class="list-group-item text-right">
+                工作微信：{$data.wechat}
+            </a>
+        </div>
+        {/volist}
+
+        <div class="list-group">
+            <a href="#" class="list-group-item active">
+                相关资源下载
+            </a>
+            {volist name='data_resource' id='data'}
+            <a href="{$data.rconnect}" target="_blank" class="list-group-item">
+                {$data.rname} <span class="glyphicon glyphicon-download-alt pull-right" aria-hidden="true"></span>
+            </a>                   
+            {/volist}
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/style.css" />
+    <script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquery2.sorted.js"></script>
+    <script type="text/javascript" src="/dist/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/dist/Js/ckform.js"></script>
+    <script type="text/javascript" src="/dist/Js/common.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquerypicture.js"></script>
+    
+    <style type="text/css">
+        body {font-size: 20px;
+            padding-bottom: 40px;
+            background-color:#e9e7ef;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body><br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<font color="#777777"><strong>添加大板块：</strong></font> 
+<form action="{:url('checkUpdateSort')}" method="post" class="definewidth m20" enctype="multipart/form-data">
+<table style="margin-left:10px;margin-top:3px;" >
+    <tr>
+         <td>大板块的主题：</td>
+		 <td><input type="text" name="stopic" style="width:400px;" value="{$list[0]['stopic']}"/></td>
+    </tr> 
+	
+	<tr>
+         <td>大板块的名字：</td>
+		 <td><input type="text" name="sname" style="width:400px;" value= "{$list[0]['sname']}"/></td>
+    </tr>	
+    <tr>
+         <td>大板块的连接：</td>
+         <td><input type="text" name="sname" style="width:400px;" value= "{$list[0]['sconnect']}"/></td>
+    </tr>   
+	<tr>
+         <td>大板块的样式：</td>
+		 <td><input type="text" name="sform" style="width:400px;" value="{$list[0]['sform']}"/></td>
+    </tr>
+	<tr>
+         <td>大板块的内容：</td>
+		 <td><input type="text" name="scontent" style="height: 100px;width:400px;" value="{$list[0]['scontent']}"/></td>
+		 <input type="hidden" name="sid" value="{$list[0]['sid']}" />
+    </tr>
+	
+    <tr>
+        <td></td>
+       <td>
+            <button style="margin-left:5px;"type="submit" class="btn btn-primary" type="button"  >修&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp改</button> 
+			&nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid"><a href="{:url('classQuery')}"> 返回列表</a></button>
+        </td>
+    </tr>
+</table>
+</form>
+
+</body>
+</html>
+
+

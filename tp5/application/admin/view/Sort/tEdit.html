@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/style.css" />
+    <script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquery2.sorted.js"></script>
+    <script type="text/javascript" src="/dist/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/dist/Js/ckform.js"></script>
+    <script type="text/javascript" src="/dist/Js/common.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquerypicture.js"></script>
+    
+    <style type="text/css">
+        body {font-size: 20px;
+            padding-bottom: 40px;
+            background-color:#e9e7ef;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body><br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<font color="#777777"><strong>添加小类：</strong></font> 
+ {volist name="list" id="data"}
+
+<form action="{:url('checkEdit',['tid' => $data.tid])}" method="post" class="definewidth m20" enctype="multipart/form-data">
+<table style="margin-left:10px;margin-top:3px;">
+
+   
+    <tr>
+         <td>父板块Id</td>
+		 <td><input type="text" name="sid"  value="{$data.sid}" style="width:400px;" /></td>
+    </tr>
+    <tr>
+         <td>教师姓名：</td>
+         <td><input type="text" name="tname" value="{$data.tname}" style="width:400px;" placeholder='请输入教师姓名'/></td>
+    </tr>
+    <tr>
+         <td>教师连接：</td>
+         <td><input type="text" name="connect" value = "{$data.connect}" style="width:400px;" placeholder='请输入教师连接'/></td>
+    </tr>
+	<tr>
+         <td>教师语录：</td>
+		 <td><input type="text" name="wisdom" value = "{$data.wisdom}" style="height: 100px;width:400px;" placeholder='请输入教师说明'/></td>
+    </tr>
+
+     <tr>
+         <td>教师介绍：</td>
+         <td><input type="text" name="summary" value = "{$data.summary}" style="height: 100px;width:400px;" placeholder='请介绍老师'/></td>
+    </tr>
+
+     <tr>
+         <td>教师图片：</td>
+         <td><input type="text" name="image" value="{$data.image}" style="width:400px;" placeholder='请输入教师图片名'/></td>
+    </tr>
+	
+    <tr>
+        <td></td>
+       <td>
+            <button style="margin-left:5px;" type="submit" class="btn btn-primary" type="button"  >保&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp存</button> &nbsp;&nbsp;
+            
+            <a href="{:url('subjectQuery',['sid' => $data.sid])}"><button type="button"  id="addnew" style="width:100px;height:30px;background:yellow;">
+            返回上一级
+        </button>
+            </a>
+            <a href="{:url('classQuery')}"><button type="button"  id="addnew" style="width:100px;height:30px;background:yellow;">
+            返回首页
+        </button>
+    </a>
+
+        </td>
+    </tr>
+    {/volist}
+</table>
+</form>
+
+</body>
+</html>
+
+

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" src="/dist/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" src="/dist/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" src="/dist/Css/style.css" />
+    <script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+    <script type="text/javascript" src="/dist/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/dist/Js/ckform.js"></script>
+    <script type="text/javascript" src="/dist/Js/common.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquerypicture.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquery-1.8.0.min.js"></script>
+    
+    <style type="text/css">
+        body {font-size: 20px;
+            padding-bottom: 40px;
+            background-color:#e9e7ef;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<form action="{:url('checkAdd')}" method="post" class="definewidth m20" enctype="multipart/form-data">
+<table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
+    <tr>
+        <td width="10%" class="tableleft">类别</td>
+        <td>
+            <select name="type" id="type">
+                <option>大模块</option>
+                {volist name="list" id="data"}
+                <option class="shu {$data.sid}" sid="{$data.sid}" value="{$data.sid}">
+                    {$data.stopic}  
+                </option>
+                {/volist}
+            </select>
+            
+
+            <select id="smallTypeId" name="smallTypeId">
+            <option value="0">教师模块</option>
+            <onption></onption>
+                  
+            </select>
+        </td>
+    </tr>
+    
+   
+    <tr>
+        <td class="tableleft">视频名称</td>
+        <td><input type="text" name="vname"/></td>
+    </tr>
+    <tr>
+        <td class="tableleft">视屏链接</td>
+        <td><input type="text" name="vconnect"/></td>
+    </tr>
+   
+    <tr>
+        <td class="tableleft"></td>
+        <td>
+            <button style="margin-left:5px;width:70px;height:50px;background:yellow;" type="submit" class="btn btn-primary" type="button"  >保存</button> 
+			&nbsp;&nbsp;
+			<a href="videoQuery.html"><button type="button" class="btn btn-success" name="backid" id="backid" style="with:100px;height:50px;background:yellow;">返回列表</button></a>
+        </td>
+    </tr>
+</table>
+</form>
+
+    <script>
+        $('#type').click(function(){
+            $(this).change(function(){
+                var objectModel = {};
+                var   value = $(this).val();
+                var   type = $(this).attr('id');
+                objectModel[type] =value;
+                $.ajax({
+                    cache:false,
+                    type:"post",
+                    url:"{:url('cha')}",
+                    dataType:"json",
+                    data:{sid:value},
+                    timeout:30000,
+                    success:function(data){
+                       // console.log(data);
+                        //alert(data);
+                        $("#smallTypeId").empty();
+                        var count = data.length;
+                        var i = 0;
+                        var b="";
+                           for(i=0;i<count;i++){
+                               b+="<option value='"+data[i].tid+"'>"+data[i].tname+"</option>";
+                           }
+                        $("#smallTypeId").append(b);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

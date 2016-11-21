@@ -1,0 +1,21 @@
+{layout name="layout" /}
+<div class="container">
+    <div class="col-md-9">
+        <div class="jumbotron"  style="text-align:center;">
+            <h1>相关软件下载</h1>
+            <p>请查看右侧的软件列表 </p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="#" class="list-group-item active">
+                相关资源下载
+            </a>
+            {volist name='data_resource' id='data'}
+            <a href="{$data.rconnect}" target="_blank" class="list-group-item">
+                {$data.rname} <span class="glyphicon glyphicon-download-alt pull-right" aria-hidden="true"></span>
+            </a>
+            {/volist}
+        </div>
+    </div>
+</div>

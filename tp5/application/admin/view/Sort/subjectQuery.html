@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap.css" />
+<link rel="stylesheet" type="text/css"
+	href="/dist/Css/bootstrap-responsive.css" />
+<link rel="stylesheet" type="text/css" href="/dist/Css/style.css" />
+<script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+<script type="text/javascript" src="/dist/Js/jquery2.sorted.js"></script>
+<script type="text/javascript" src="/dist/Js/bootstrap.js"></script>
+<script type="text/javascript" src="/dist/Js/ckform.js"></script>
+<script type="text/javascript" src="/dist/Js/common.js"></script>
+
+<style type="text/css">
+body {font-size: 20px;
+	padding-bottom: 40px;
+	background-color: #e9e7ef;
+}
+
+.sidebar-nav {
+	padding: 9px 0;
+}
+
+@media ( max-width : 980px) {
+	/* Enable use of floated navbar text */
+	.navbar-text.pull-right {
+		float: none;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+}
+
+th{
+	width:13%;
+}
+
+.pagination li{
+    
+    float:left;
+    padding-left:30px;
+    list-style: none;
+	
+}
+</style>
+</head>
+<body>
+	<form class="form-inline definewidth m20" action="#" method="get">
+		 <font color="#777777"><strong>小类信息：</strong></font> 
+		
+	</form>
+	<table class="table table-bordered table-hover definewidth m10">
+		<thead>
+			<tr>
+				<th>老师名</th>
+			    <th>板块名</th>
+				<th>连接</th>
+				<th>祝福语</th>
+				<th>介绍</th>
+				<th>图片</th>
+				<th>修改</th>
+				<th>删除</th>
+			</tr>
+				
+		</thead>
+		{volist name="list" id="data"}
+			{volist name="sList" id="bname"}
+		<tr>
+			<td>{$data.tname}</td>
+			<td>{$bname.stopic}</td>
+			<td>{$data.connect}</td>
+			<td>{$data.wisdom}</td>
+			<td>{$data.summary}</td>
+		    <td>{$data.image}</td>
+		    <td><a href="{:url('tEdit',['tid' => $data.tid])}">修改</a></td>
+			<td>
+				<a href="{:url('tDelete',['tid' => $data.tid])}">删除</a></button> 
+			</td>
+
+		</tr>
+			{/volist}
+		{/volist}
+
+
+	</table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="{:url('subjectAdd',['sid' => $sList[0]['sid']])}"><button type="button"  id="addnew" style="width:80px;height:30px;background:yellow;">
+			添加小类
+		</button>
+	</a>
+
+	<a href="{:url('classQuery')}"><button type="button"  id="addnew" style="width:100px;height:30px;background:yellow;">
+			返回上一级
+		</button>
+	</a>
+
+		{$page}
+</body>
+ 
+</html>

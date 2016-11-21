@@ -1,0 +1,40 @@
+
+{layout name="layout" /}
+<div class="container" style="margin-bottom: 20px;text-align:center;">
+    {volist name='content' id='cont'}
+    <a href="<?php echo  '/'.$cont['nconnect'] . '/'.$cont['nid'];?>" target="_blank" class="btn btn-{$cont.nform}">{$cont.nname}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    {/volist}
+
+</div>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="text-center">PHP 自学站</h1>
+        <p class="text-center">一个用心的PHP自学资源站，用心发布web开发课程，可贵的不是学习
+            热情，而是对知识的积累，希望您在这里都能喜欢上编程，喜欢上PHP，和我们一起畅游web开发之旅。</p>
+        <p class="text-right"><span class="text-muted">phpstudy.com (吴洋,董航宇)</span></p>
+    </div>
+
+    {volist name='data' id='content'}
+    <div class=" col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">{$content.stopic}</div>
+            <div class="panel-body text-center">
+                <a href="<?php echo  '/'.$content['sconnect'] . '/'.$content['sid'];?>" class="btn btn-{$content.sform} btn-lg">{$content.sname}</a>
+                <p class="text-left text-muted" style="margin-top:20px;">
+                    &nbsp;&nbsp;&nbsp;&nbsp;{$content.scontent}
+                </p>
+            </div>
+        </div>
+    </div>
+    {/volist}
+
+
+    <div class=" col-md-12 jumbotron">
+        <h3 class="text-center">
+            <p>一张图看懂程序运行流程</p>
+        </h3>
+
+        <img src="/bootstrap/img/bs.png"/>
+    </div>
+</div>
+

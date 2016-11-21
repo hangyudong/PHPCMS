@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP学习后台</title>
+    <meta charset="UTF-8">
+	 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/dist/Css/style.css" />
+	<link href="/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/dist/Js/jquery2.js"></script>
+    <script type="text/javascript" src="/dist/Js/jquery2.sorted.js"></script>
+    <script type="text/javascript" src="/dist/Js/bootstrap.js"></script>
+    <script type="text/javascript" src="/dist/Js/ckform.js"></script>
+    <script type="text/javascript" src="/dist/Js/common.js"></script>
+
+    <style type="text/css">
+        body {font-size: 20px;
+            padding-bottom: 40px;
+            background-color:#e9e7ef;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+
+        @media (max-width: 980px) {
+            /* Enable use of floated navbar text */
+            .navbar-text.pull-right {
+                float: none;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+   <a href="{:url('teacherQuery')}"><button type="submit" class="btn btn-primary">返回</button></a>
+	
+<table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>用户名</th>
+        
+        <th>Email</th>
+       
+        <th>创建时间</th>
+        <th>删除用户</th>
+    </tr>
+    </thead>
+		{volist name="user" id="user"}
+        <tr>
+                <td><a href="teacherdetail.html">{$user.username}</a></td>
+                
+                <td>{$user.email}</td>
+                <td>{$user.create_time}</td>
+              
+                <td><a href="{:url('checkDelete',['uid' => $user.uid])}">删除</a></td>
+        </tr>
+        {/volist}   
+       
+       </table>
+	   <div class="container">
+		   <div class="row">
+		   {$page}
+		   </div>
+	   </div>
+	   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

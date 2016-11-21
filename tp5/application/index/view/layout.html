@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <title>PHP自学站</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        {css  href='/bootstrap/css/bootstrap.css' /}
+        {css href='/bootstrap/css/base.css' /}
+        {js href='/bootstrap/js/jquery-2.1.4.min.js' /}
+        {js href='/bootstrap/js/bootstrap.js' /}
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="__WEBSITE__"><span class='glyphicon glyphicon-console'></span>  {PHPStudy}</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="__WEBSITE__">首页</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                教学视频 <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    {volist name='data' id='con'}
+                                    <a href="<?php echo  '/' . $con['sconnect'] . '/'.$con['sid'];?>">{$con.sname}</a>
+                                    {/volist}
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{:url('/soft')}">软件下载</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="__WEBSITE__">关于我们</a></li>
+                    </ul>
+                    {if !$Think.session.username}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{:url('/login')}">登录</a></li>
+                        <li><a href="{:url('/register')}">注册</a></li>
+                    </ul>
+                    {else}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a>欢迎：{$Think.session.username}</a></li>
+                        <li><a href="{:url('/logout')}">退出</a></li>
+                    </ul>
+                    {/if}
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        {__CONTENT__}
+
+        <div class="col-md-12" style="margin-top:10px;">
+            <p class="well well-lg text-right text-muted">
+                版权所有(c) 2016, phpstudy
+            </p>
+        </div>
+    </body>
+</html>
